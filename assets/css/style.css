@@ -37,7 +37,7 @@ img{
 
 input,textarea {
     display: block;
-    background-color: rgb(190, 168, 190);
+    background-color: rgb(201, 164, 201);
     border: 1px solid rgb(75, 75, 75);
     border-radius: 20px;
     font-size: medium;
@@ -52,7 +52,7 @@ button{
     padding: 5px 15px;
     border: 1px solid rgb(97, 96, 96);
     font-size: small;
-    background-color: rgb(190, 168, 190);
+    background-color: rgb(201, 164, 201);
     display: inline-block;
     margin: auto;
     border-radius: 3px;

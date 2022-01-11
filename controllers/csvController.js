@@ -1,40 +1,53 @@
-const Student = require("../models/emi");
-// const Company  = require("../models/company");
-// const Interview = require('../models/interview');
+const Emi = require("../models/emi");
 
 const fs = require('fs');
 
 // action function to create csv files and responsing with that
-module.exports.allStudent = async function (req, res) {
+module.exports.download = async function (req, res) {
   try {
-    // fetching the data from the data base server
-    const students = await Student.find({})
-    .populate('batch');
+    let emi= await Emi.findById(req.params.id);
+    let duration=emi.duration;
+    let amount=emi.amount;
+    let rate=emi.rate/12/100;
+    let bracket= Math.pow(1+rate,duration)
+    monthlyEmi= (amount * rate * bracket)/(bracket-1);
+    amount=monthlyEmi*duration;
+    percent=100/duration;
+    remPercent=100;
 
+    let months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    let month =parseInt(new Date().getMonth());
+    let year =parseInt(new Date().getFullYear());
+    let count=1;
+
+    
       // creating the csv file data here only 
-    let serialNumber = 1, entry = "";
-    console.log(students.data);
-    let fileData = "S.No,Name of Student,Batch,Batch Co-ordinator,College,Placement Status,DSA Score,Web Score,React Score,"
-    +"Interview1,Result1,Interview2,Result2,Interview3,Result3"
-    for(let student of students){
-        // adding each student details to entry according to row 
-        entry = serialNumber+","+student.name+","+student.batch.name+","+student.batch.cordinator+","+student.college.replace(",","")
-        +","+student.status+","+student.dsa+","+student.web+","+student.react;
-        if(student.interviews){
-          // andding students interview details and finally adding to filedata 
-          for(let item of student.interviews){
-            entry+=","+item.company+"("+item.date.toString().split("GMT")[0]+"),"+item.result
-          }
-        }
-        serialNumber++;
-        fileData+="\n"+entry;
+    let entry = "";
+    let fileData = "Sr.No,Months,Monthly EMI,Remaining Amount,%Loan Remaining,";
+    for(duration;duration>0;duration--){
+      month++;
+      if(month==12){
+          month=0;
+          year++;
+      }
+      amount-=monthlyEmi;
+      remPercent-=percent;
+      
+      entry = count+","+months[month]+year +","+Math.round(monthlyEmi)+","+Math.max(Math.round(amount),0)+","+remPercent.toFixed(2)
+      count++;
+      fileData+="\n"+entry;
+      
     }
-    const file = fs.writeFile('assets/Sudents-Data.csv',fileData,(err,data)=>{
+    fileData+="\n"+"Principal Amount, Rs."+emi.amount;
+    fileData+="\n"+"Rate of Intrest,"+emi.rate +"%";
+    fileData+="\n"+"Duration,"+emi.duration +" Months";
+    const file = fs.writeFile('assets/EMI-Data.csv',fileData,(err,data)=>{
       if(err){
           console.log(err);
-          return res.redirect('/');
+          return res.redirect('back');
       }
-      return res.download('assets/Sudents-Data.csv');
+      console.log(data);
+      return res.download('assets/EMI-Data.csv');
     });
   } 
   catch (err) {

@@ -36,11 +36,23 @@ module.exports.view=async function(req,res){
 
 module.exports.history=async function(req,res){
     try{
-        let emi= await Emi.find({});
+        let emi= await Emi.find({email:req.user.email});
         return res.render('viewHistory',{
             Emi:emi
         });
     }catch(err){
         req.flash('error','Some Error Occured');
+    }
+}
+
+module.exports.email=async function(req,res){
+    try{
+        
+        let emi= await Emi.findById(req.params.id);
+        mailer.send(emi);
+        res.redirect('back');
+    }
+    catch(err){
+        console.log(err);
     }
 }

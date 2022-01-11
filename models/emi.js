@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
 const { Schema } = require("mongoose");
+const { email } = require('../controllers/emiController');
 
 // schema to store students details 
 const emiSchema=new mongoose.Schema({
@@ -15,6 +16,10 @@ const emiSchema=new mongoose.Schema({
     duration:{
         type:Number,
         required:true,
+    },
+    email:{
+        type:String,
+        required:true
     }
     
 },{

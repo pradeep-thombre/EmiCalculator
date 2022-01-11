@@ -6,6 +6,7 @@
         <input type="number" name="amount" placeholder="Principal Amount*" required oninput="roundOff(this)">
         <input type="number" name="rate" placeholder="Rate of interest*" step=0.01 required>
         <input type="number" name="duration" placeholder="Duration*" required oninput="roundOff(this)">
+        <input type="hidden" name="email" value="<%= _locals.user.email %>">
         <button value="calEMI" class="submit">Calculate</button>
     </form>
 

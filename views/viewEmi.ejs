@@ -4,7 +4,6 @@
     <p>Intrest Rate- <%= Emi.rate %>%</p>
     <p>Duration- <%= Emi.duration %>Months</p>
 
-    <button><a href="">Download</a></button>
     <input type="hidden" id="amount" value="<%= Emi.amount %>">
     <input type="hidden" id="rate" value="<%= Emi.rate %>">
     <input type="hidden" id="duration" value="<%= Emi.duration %>">
@@ -21,13 +20,12 @@
                     <th>%Loan Remaining</th>
                 </thead>
                 <tbody id="table-body">
-                    
-        
                 </tbody>
-            
-            
             </table>
-        </div>
+        
+        <button><a href="/emi/download/<%= Emi.id %>">Download Data</a></button>
+        <button><a href="/emi/email/<%= Emi.id %>">Email Data</a></button>
+    </div>
     
 </div>
 
