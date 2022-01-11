@@ -1,0 +1,32 @@
+
+<link rel="stylesheet" href="css/style.css">
+
+<div id="table-div">
+<!-- list the details of all student -->
+    <table id="table">
+
+        <thead>
+            <th>Principal Amount</th>
+            <th>Intrest Rate</th>
+            <th>Duration</th>
+            <th>Action</th>
+            <th>Remove</th>
+        </thead>
+        <tbody>
+            <%for(let emi of Emi){%>
+                <tr>
+                    <!-- student details  -->
+                    <td><%= emi.amount %></td>
+                    <td><%= emi.rate %>%</td>
+                    <td><%= emi.duration %></td>
+                    <td><a href="/emi/view/<%=emi.id%>"><i class="far fa-file-alt"></i>View</a></td>
+                    <td><a href="/emi/delete/<%=emi.id%>"><i class="fas fa-trash">Delete</i></a></td>
+                </tr>
+            <%}%>
+
+        </tbody>
+    
+    
+    </table>
+</div>
+<script src="/js/index.js"></script>

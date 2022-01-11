@@ -1,0 +1,11 @@
+<!-- id user is logged in then show links else show empty box  -->
+<% if (_locals.user){ %>
+    <div id='nav' class='flex' style="margin: 0;">
+        <ul>
+            <li><a href="/"><Button><i class="fas fa-home"></i>  Home</Button></a></li>
+            <li><a href="/emi/history"><button>History</button></a></li>
+        </ul>
+    </div>
+<% }else{ %>
+    <div style="min-height: 30px;"></div>
+<% } %>

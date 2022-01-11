@@ -1,0 +1,27 @@
+<!-- if users is signed in then show navigation buttons else keep an empty window along with sign in sign up buttons  -->
+<% if (_locals.user){ %>
+    <!-- add student form  -->
+    <form action="/emi/create" method="POST">
+        <h1>Calculate Emi</h1>
+        <input type="number" name="amount" placeholder="Principal Amount*" required oninput="roundOff(this)">
+        <input type="number" name="rate" placeholder="Rate of interest*" step=0.01 required>
+        <input type="number" name="duration" placeholder="Duration*" required oninput="roundOff(this)">
+        <button value="calEMI" class="submit">Calculate</button>
+    </form>
+
+<% }else{ %>
+    <!-- if user is not logged show them sign in sign up buttons  -->
+    <h1 style="letter-spacing: 5px;">Welcome to  EMI CALCULATOR!!!</h1>
+    <br><br>
+    <p>Please Login to Proceed further</p>
+    <button type="button" class="submit">
+            <a href="/users/signIn">Sign In</a>
+    </button>
+    <button type="button" class="submit">
+            <a href="/users/signUp">Sign Up</a>
+    </button>
+    
+    <!-- <a href="/users/auth/google"><button class="submit"><i class="fab fa-google-plus-g"></i>Google SinIn/Sign Up</button></a> -->
+<% } %>
+
+<script src="/js/index.js"></script>

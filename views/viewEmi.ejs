@@ -1,0 +1,34 @@
+<!-- list the details of all student -->
+<div class="flex">
+    <p>Principal - Rs. <%= Emi.amount %></p>
+    <p>Intrest Rate- <%= Emi.rate %>%</p>
+    <p>Duration- <%= Emi.duration %>Months</p>
+
+    <button><a href="">Download</a></button>
+    <input type="hidden" id="amount" value="<%= Emi.amount %>">
+    <input type="hidden" id="rate" value="<%= Emi.rate %>">
+    <input type="hidden" id="duration" value="<%= Emi.duration %>">
+
+    <div id="table-div">
+        <!-- list the details of all student -->
+            <table id="table">
+        
+                <thead>
+                    <th>Sr.No</th>
+                    <th>Months</th>
+                    <th>Monthly EMI</th>
+                    <th>Balance</th>
+                    <th>%Loan Remaining</th>
+                </thead>
+                <tbody id="table-body">
+                    
+        
+                </tbody>
+            
+            
+            </table>
+        </div>
+    
+</div>
+
+<script src="/js/viewEmi.js"></script>
